@@ -162,7 +162,7 @@ main {
 
 /* Card Payment Section - Start */
 .container__payment {
-  display: none;
+  display: block;
 }
 
 .payment-form {

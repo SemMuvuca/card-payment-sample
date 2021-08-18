@@ -1,9 +1,12 @@
 //REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://www.mercadopago.com/developers/panel
-const mp = new MercadoPago('YOUR_PUBLIC_KEY');
+const mp = new MercadoPago('TEST-e5cf1519-a8c0-44d6-ba2d-8e05cdbe44c6');
 
 function loadCardForm() {
-    const productCost = document.getElementById('amount').value;
-    const productDescription = document.getElementById('product-description').innerText;
+    // const productCost = document.getElementById('amount').value; // vai vir do quasar
+    // const productDescription = document.getElementById('product-description').innerText; // pode vir do quasar, não é obrigatório
+
+    const productCost = "20" // total a pagar
+    const productDescription = "Teste de Transação"
 
     const cardForm = mp.cardForm({
         amount: productCost,
@@ -102,7 +105,7 @@ function loadCardForm() {
                 })
                 .catch(error => {
                     alert("Unexpected error\n"+JSON.stringify(error));
-                });;
+                });
             },
             onFetching: (resource) => {
               console.log("Fetching resource: ", resource);
@@ -116,30 +119,35 @@ function loadCardForm() {
     });
 };
 
-//Handle transitions
-document.getElementById('checkout-btn').addEventListener('click', function(){ 
-    $('.container__cart').fadeOut(500);
-    setTimeout(() => { 
-        loadCardForm();
-        $('.container__payment').show(500).fadeIn(); 
-    }, 500);
-});
-document.getElementById('go-back').addEventListener('click', function(){ 
-    $('.container__payment').fadeOut(500);
-    setTimeout(() => { $('.container__cart').show(500).fadeIn(); }, 500);
-});
+loadCardForm();
+// Handle transitions
+// document.getElementById('checkout-btn').addEventListener('click', function(){ 
+//     $('.container__cart').fadeOut(500);
+//     setTimeout(() => { 
+//         loadCardForm();
+//         $('.container__payment').show(500).fadeIn(); 
+//     }, 500);
+// });
+// document.getElementById('go-back').addEventListener('click', function(){ 
+//     $('.container__payment').fadeOut(500);
+//     setTimeout(() => { $('.container__cart').show(500).fadeIn(); }, 500);
+// });
 
 //Handle price update
-function updatePrice(){
-    let quantity = document.getElementById('quantity').value;
-    let unitPrice = document.getElementById('unit-price').innerText;
-    let amount = parseInt(unitPrice) * parseInt(quantity);
+// function updatePrice(){
+//     // let quantity = document.getElementById('quantity').value;
+//     // let unitPrice = document.getElementById('unit-price').innerText; 
 
-    document.getElementById('cart-total').innerText = '$ ' + amount;
-    document.getElementById('summary-price').innerText = '$ ' + unitPrice;
-    document.getElementById('summary-quantity').innerText = quantity;
-    document.getElementById('summary-total').innerText = '$ ' + amount;
-    document.getElementById('amount').value = amount;
-};
-document.getElementById('quantity').addEventListener('change', updatePrice);
-updatePrice();
+//     let quantity = 1; // vai vir do quasar
+//     let unitPrice = 10; // vai vir do quasar
+
+//     let amount = parseInt(unitPrice) * parseInt(quantity);
+
+//     // document.getElementById('cart-total').innerText = '$ ' + amount;
+//     document.getElementById('summary-price').innerText = '$ ' + unitPrice;
+//     document.getElementById('summary-quantity').innerText = quantity;
+//     document.getElementById('summary-total').innerText = '$ ' + amount;
+//     document.getElementById('amount').value = amount;
+// };
+// document.getElementById('quantity').addEventListener('change', updatePrice);
+// updatePrice();
