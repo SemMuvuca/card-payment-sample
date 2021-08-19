@@ -73,7 +73,7 @@ function loadCardForm() {
                     identificationType,
                 } = cardForm.getCardFormData();
             
-                fetch("/process_payment", {
+                fetch("localhost:8080/mercadopago/process_payment", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
